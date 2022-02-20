@@ -13,10 +13,10 @@ class GetGithubUserDetailsUseCase @Inject constructor(private val repository: Gi
         if (response.isSuccessful) {
             response.body()?.let {
                 return GithubUserDetails(
-                    it.avatarUrl,
-                    it.login,
-                    it.htmlUrl,
-                    it.name,
+                    it.avatarUrl ?: "",
+                    it.login ?: "",
+                    it.htmlUrl ?: "",
+                    it.name ?: "",
                     it.twitterUsername ?: "",
                     it.company ?: "",
                     it.location ?: "",

@@ -35,7 +35,7 @@ class GithubUserFeature : BaseUITest() {
     }
 
     @Test
-    fun displaysListOfPlaylists() {
+    fun displaysListOfUsers() {
 
         assertRecyclerViewItemCount(R.id.users_list, 10)
 
@@ -57,7 +57,7 @@ class GithubUserFeature : BaseUITest() {
     }
 
     @Test
-    fun displaysLoaderWhileFetchingThePlaylists() {
+    fun displaysLoaderWhileFetchingTheUsers() {
         IdlingRegistry.getInstance().unregister(idlingResource)
         assertDisplayed(R.id.loader)
     }

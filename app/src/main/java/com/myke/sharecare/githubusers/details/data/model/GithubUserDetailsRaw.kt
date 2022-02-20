@@ -26,7 +26,7 @@ data class GithubUserDetailsRaw(
     val blog: String?,
     val location: String?,
     val email: String?,
-    val hireable: String?,
+    val hireable: Boolean?,
     val bio: String?,
     @Json(name = "twitter_username") val twitterUsername: String?,
     @Json(name = "public_repos") val publicRepos: Int,

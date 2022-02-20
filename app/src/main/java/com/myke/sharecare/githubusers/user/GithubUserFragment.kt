@@ -15,6 +15,7 @@ import com.myke.sharecare.githubusers.user.viewmodel.GithubUserViewModel
 import com.myke.sharecare.githubusers.user.viewmodel.GithubUserViewModelFactory
 import com.myke.sharecare.githubusers.user.viewmodel.ViewType
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_users_list.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,7 +25,7 @@ import javax.inject.Inject
 class GithubUserFragment : Fragment() {
 
     lateinit var viewModel: GithubUserViewModel
-
+    private val mDisposable = CompositeDisposable()
     private var currentView: ViewType = ViewType.GRID
     lateinit var adapter: GithubUserListRecyclerViewAdapter
 
@@ -51,11 +52,15 @@ class GithubUserFragment : Fragment() {
         setupAdapterUI()
         setupRecyclerViewSwitcher()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.pagedUserList.collectLatest {
-                adapter.submitData(it)
-            }
-        }
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewModel.pagedUserList. {
+//                adapter.submitData(it)
+//            }
+//        }
+
+        mDisposable.add(viewModel.pagedUserList.subscribe {
+            adapter.submitData(lifecycle, it)
+        })
     }
 
 
@@ -147,6 +152,11 @@ class GithubUserFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        mDisposable.dispose()
+
+        super.onDestroyView()
+    }
 
     companion object {
         @JvmStatic

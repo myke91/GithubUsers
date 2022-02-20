@@ -3,6 +3,7 @@ package com.myke.sharecare.githubusers.user.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.*
+import androidx.paging.rxjava2.cachedIn
 import com.myke.sharecare.githubusers.user.business.GithubUserMapper
 import com.myke.sharecare.githubusers.user.data.model.GithubUser
 import com.myke.sharecare.githubusers.user.data.GithubUserRepository
@@ -12,6 +13,7 @@ import com.myke.sharecare.githubusers.user.data.source.remote.GithubUsersRemoteD
 import com.myke.sharecare.githubusers.user.interactors.GetGithubUsersUseCase
 import com.myke.sharecare.shared.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.Flowable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -28,13 +30,14 @@ class GithubUserViewModel @Inject constructor(
     val loader = MutableLiveData<Boolean>()
     val currentView = MutableLiveData<ViewType>()
 
-    lateinit var pagedUserList: Flow<PagingData<GithubUser>>
+    lateinit var pagedUserList: Flowable<PagingData<GithubUser>>
 
     fun getUsers() {
         loader.postValue(true)
         viewModelScope.launch {
             useCase.run().let {
                 pagedUserList = it
+                pagedUserList.cachedIn(viewModelScope)
                 loader.postValue(false)
             }
         }

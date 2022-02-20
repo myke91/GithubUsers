@@ -74,11 +74,12 @@ dependencies {
     //retrofit
     implementation(Deps.RETROFIT)
     implementation(Deps.RETROFIT_MOSHI_CONVERTER)
+    implementation(Deps.RETROFIT_RX_JAVA_ADAPTER)
     implementation(Deps.LOGGING_INTERCEPTOR)
 
-    //courotines
-    implementation(Deps.KOTLIN_COROUTINE_CORE)
-    implementation(Deps.KOTLIN_COROUTINE_ANDROID)
+    //rx android
+    implementation(Deps.RX_ANDROID)
+    implementation(Deps.RX_JAVA)
 
     //databinding
     implementation(Deps.DATABINDING_COMMON)
@@ -87,6 +88,7 @@ dependencies {
     implementation(Deps.MOSHI)
     implementation(Deps.MOSHI_KOTLIN)
     implementation(Deps.MOSHI_ADAPTERS)
+    implementation("androidx.paging:paging-rxjava2-ktx:3.1.0")
     kapt(Deps.MOSHI_KOTLIN_CODEGEN)
 
 

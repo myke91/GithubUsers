@@ -1,4 +1,7 @@
 object Vers {
+    const val retrofixRxVersion = "2.3.0"
+    const val rxJavaVersion = "2.1.3"
+    const val rxAndroidVersion = "2.0.1"
     const val timberVersion = "4.7.1"
     const val kotlinVersion = "1.6.10"
     const val appcompatVersion = "1.3.1"
@@ -36,6 +39,9 @@ object Vers {
 }
 
 object Deps {
+    const val RETROFIT_RX_JAVA_ADAPTER = "com.squareup.retrofit2:adapter-rxjava2:${Vers.retrofixRxVersion}"
+    const val RX_JAVA = "io.reactivex.rxjava2:rxjava:${Vers.rxJavaVersion}"
+    const val RX_ANDROID = "io.reactivex.rxjava2:rxandroid:${Vers.rxAndroidVersion}"
     const val PAGING = "androidx.paging:paging-runtime-ktx:${Vers.pagingVersion}"
     const val TIMBER = "com.jakewharton.timber:timber:${Vers.timberVersion}"
     const val HILT_ANDROID_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:${Vers.hiltVersion}"

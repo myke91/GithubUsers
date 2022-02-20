@@ -12,8 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class GithubUserDetailsRepository @Inject constructor(
-    private val datasource: GithubUserDetailsDatasource,
-    private val mapper: GithubUserMapper
+    private val datasource: GithubUserDetailsDatasource
 ) {
 
     suspend fun getUserDetails(username: String): Response<GithubUserDetailsRaw> = datasource.getGithubUserDetails(username)

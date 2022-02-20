@@ -24,26 +24,12 @@ class GithubUserDetailsViewModel @Inject constructor(private val usecase: GetGit
 
 
     fun getUserDetails(username: String) {
-//        wrapEspressoIdlingResource {
         viewModelScope.launch {
             _userDetails.postValue(Resource.loading(null))
             loader.postValue(true)
-//                if (networkHelper?.isNetworkConnected() == true) {
             usecase.run(username).let {
-//                if (it.isSuccessful) {
-//                    it.body()?.let { results ->
-//                                Log.i(TAG, "Successfully Retrieved ${results.totalResults} movies")
                 _userDetails.postValue(Resource.success(it))
             }
-//                } else {
-////                            Log.e(
-////                                TAG,
-////                                "Error fetching online movie records: ${it.errorBody().toString()} "
-////                            )
-//                    _userDetails.postValue(Resource.error(it.errorBody().toString(), null))
-//                }
         }
-//                }
     }
-//        }
 }

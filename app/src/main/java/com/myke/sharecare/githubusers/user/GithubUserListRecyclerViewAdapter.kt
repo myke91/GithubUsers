@@ -17,8 +17,6 @@ import com.myke.sharecare.githubusers.user.data.model.GithubUserRaw
 import com.myke.sharecare.githubusers.user.viewmodel.ViewType
 import com.myke.sharecare.shared.utils.loadImageUrl
 
-
-
 class GithubUserListRecyclerViewAdapter(
     private val listener: (String) -> Unit
 ) : PagingDataAdapter<GithubUser, GithubUserListRecyclerViewAdapter.ViewHolder>(DefaultDiffCallback()) {

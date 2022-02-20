@@ -1,20 +1,11 @@
 package com.myke.sharecare.githubusers.details
 
-import com.myke.sharecare.githubusers.details.data.GithubUserDetailsService
 import com.myke.sharecare.githubusers.details.data.model.GithubUserDetails
 import com.myke.sharecare.githubusers.details.viewmodel.GithubUserDetailsViewModel
 import com.myke.sharecare.githubusers.user.data.GithubUserRepository
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
-import com.myke.sharecare.githubusers.utils.captureValues
-import com.myke.sharecare.githubusers.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
 import org.junit.Test
 import java.lang.RuntimeException
 

@@ -18,15 +18,14 @@ class GetGithubUserDetailsUseCase @Inject constructor(private val repository: Gi
                     it.htmlUrl,
                     it.name,
                     it.twitterUsername ?: "",
-                    it.company?: "",
-                    it.location?: "",
-                    it.blog?: "",
-                    it.email?: ""
+                    it.company ?: "",
+                    it.location ?: "",
+                    it.blog ?: "",
+                    it.email ?: ""
                 )
             }
         }
         throw Exception("something went wrong")
-
     }
 
 

@@ -31,13 +31,12 @@ class GithubUserDetailsModule {
 
 
     @Provides
-    fun provideGithubUserDetailsRepository(
-        datasource: GithubUserDetailsDatasource,
-        mapper: GithubUserMapper
-    ): GithubUserDetailsRepository = GithubUserDetailsRepository(datasource, mapper)
+    fun githubUserDetailsRepository(
+        datasource: GithubUserDetailsDatasource
+    ): GithubUserDetailsRepository = GithubUserDetailsRepository(datasource)
 
     @Provides
-    fun provideGithubUserDetailsDatasource(api: GithubUserDetailsApi): GithubUserDetailsDatasource =
+    fun githubUserDetailsDatasource(api: GithubUserDetailsApi): GithubUserDetailsDatasource =
         GithubUserDetailsRemoteDatasource(api)
 
 }

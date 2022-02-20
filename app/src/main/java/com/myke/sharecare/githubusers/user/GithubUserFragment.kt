@@ -52,12 +52,6 @@ class GithubUserFragment : Fragment() {
         setupAdapterUI()
         setupRecyclerViewSwitcher()
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.pagedUserList. {
-//                adapter.submitData(it)
-//            }
-//        }
-
         mDisposable.add(viewModel.pagedUserList.subscribe {
             adapter.submitData(lifecycle, it)
         })

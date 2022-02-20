@@ -9,7 +9,6 @@ import javax.inject.Inject
 class GithubUserDetailsViewModelFactory @Inject constructor(private val usecase: GetGithubUserDetailsUseCase) :
     ViewModelProvider.Factory {
 
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return GithubUserDetailsViewModel(usecase) as T
     }

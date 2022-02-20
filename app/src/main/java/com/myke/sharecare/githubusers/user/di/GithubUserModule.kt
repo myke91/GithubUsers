@@ -47,7 +47,7 @@ class GithubUserModule {
     }
 
     @Provides
-    fun provideMoshi(): Moshi {
+    fun moshi(): Moshi {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -55,7 +55,7 @@ class GithubUserModule {
 
 
     @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun okHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val githubAuthInterceptor = Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
             requestBuilder.addHeader(
@@ -77,9 +77,9 @@ class GithubUserModule {
             .writeTimeout(90, TimeUnit.SECONDS)
 
 
-//        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             okHttpClient.addInterceptor(httpLoggingInterceptor)
-//        }
+        }
 
         return okHttpClient.build()
 
@@ -94,17 +94,17 @@ class GithubUserModule {
 
 
     @Provides
-    fun provideGithubUsersRepository(
+    fun githubUsersRepository(
         datasource: GithubUserDatasource
     ): GithubUserRepository = GithubUserRepository(datasource)
 
     @Provides
-    fun provideGithubUsersDatasource(api: GithubUserApi): GithubUserDatasource =
+    fun githubUsersDatasource(api: GithubUserApi): GithubUserDatasource =
         GithubUsersRemoteDatasource(api)
 
 
     @Provides
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    fun httpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 Timber.tag("SHARECARE - GithubAPI").i(message)

@@ -3,11 +3,9 @@ package com.myke.sharecare.githubusers
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.myke.sharecare.githubusers.user.di.idlingResource
-import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotExist
@@ -20,7 +18,7 @@ class GithubUserDetailsFeature : BaseUITest() {
 
     @Test
     fun displaysUserNameAndDetails() {
-        navigationToPlaylistDetails(0)
+        navigationToUserDetails(0)
 
         assertDisplayed(R.id.avatar)
 
@@ -29,38 +27,38 @@ class GithubUserDetailsFeature : BaseUITest() {
 
 
     @Test
-    fun displaysLoaderWhileFetchingThePlaylistDetails() = runBlocking {
+    fun displaysLoaderWhileFetchingTheUserDetails() = runBlocking {
         IdlingRegistry.getInstance().unregister(idlingResource)
 
         delay(2000)
-        navigationToPlaylistDetails(0)
+        navigationToUserDetails(0)
 
         assertDisplayed(R.id.details_loader)
     }
 
     @Test
     fun hidesLoader() {
-        navigationToPlaylistDetails(0)
+        navigationToUserDetails(0)
 
         assertNotDisplayed(R.id.details_loader)
     }
 
     @Test
     fun displaysErrorMessageWhenNetworkFails() {
-        navigationToPlaylistDetails(1)
+        navigationToUserDetails(1)
 
         assertDisplayed(R.string.generic_error)
     }
 
     @Test
     fun hidesErrorMessage() = runBlocking {
-        navigationToPlaylistDetails(3)
+        navigationToUserDetails(3)
         delay(3000)
 
         assertNotExist(R.string.generic_error)
     }
 
-    private fun navigationToPlaylistDetails(row: Int) {
+    private fun navigationToUserDetails(row: Int) {
         onView(
             AllOf.allOf(
                 withId(R.id.avatar),

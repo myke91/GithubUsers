@@ -1,15 +1,10 @@
 package com.myke.sharecare.githubusers.details
 
 import com.myke.sharecare.githubusers.details.data.source.remote.GithubUserDetailsApi
-import com.myke.sharecare.githubusers.details.data.GithubUserDetailsService
 import com.myke.sharecare.githubusers.details.data.model.GithubUserDetails
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import java.lang.RuntimeException
@@ -23,7 +18,7 @@ class GithubUserDetailsServiceTest : BaseUnitTest() {
     private val id = "1"
 
     @Test
-    fun fetchPlaylistDetailsFromAPI() = runBlockingTest {
+    fun fetchUsersDetailsFromAPI() = runBlockingTest {
 //        service = GithubUserDetailsService(api)
 //
 //        service.fetchUserDetails(id).single()
@@ -35,7 +30,7 @@ class GithubUserDetailsServiceTest : BaseUnitTest() {
     fun convertValuesToFlowResultAndEmitThem() = runBlockingTest {
         mockSuccessfulCase()
 
-//        assertEquals(Result.success(playlistDetails), service.fetchUserDetails(id).single())
+//        assertEquals(Result.success(userDetails), service.fetchUserDetails(id).single())
     }
 
 
@@ -48,7 +43,7 @@ class GithubUserDetailsServiceTest : BaseUnitTest() {
 
 
     private suspend fun mockSuccessfulCase() {
-//        whenever(api.fetchUserDetails(id)).thenReturn(playlistDetails)
+//        whenever(api.fetchUserDetails(id)).thenReturn(userDetails)
 //
 //        service = GithubUserDetailsService(api)
     }

@@ -1,20 +1,11 @@
 package com.myke.sharecare.githubusers.details
 
-import com.myke.sharecare.githubusers.details.data.GithubUserDetailsService
 import com.myke.sharecare.githubusers.details.data.model.GithubUserDetails
 import com.myke.sharecare.githubusers.details.viewmodel.GithubUserDetailsViewModel
 import com.myke.sharecare.githubusers.user.data.GithubUserRepository
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
-import com.myke.sharecare.githubusers.utils.captureValues
-import com.myke.sharecare.githubusers.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
 import org.junit.Test
 import java.lang.RuntimeException
 
@@ -23,28 +14,28 @@ class GithubUserDetailsViewModelTest : BaseUnitTest() {
 
     private lateinit var viewModel: GithubUserDetailsViewModel
     private val repository: GithubUserRepository = mock()
-    private val playlists = mock<GithubUserDetails>()
-    private val expected = Result.success(playlists)
+    private val users = mock<GithubUserDetails>()
+    private val expected = Result.success(users)
     private val exception = RuntimeException("something went wrong")
     private val service: GithubUserDetailsService = mock()
 
     private val id = "1"
 
     @Test
-    fun getPlaylistDetailsFromService() = runBlockingTest {
+    fun getUserDetailsFromService() = runBlockingTest {
 //        mockSuccessfulCase()
 //
-//        viewModel.getPlaylistsDetails(id)
+//        viewModel.getUserDetails(id)
 //        viewModel.userDetails.getValueForTest()
 //
 //        verify(service, times(1)).fetchUserDetails(id)
     }
 
     @Test
-    fun emitPlaylistDetailsFromService() = runBlockingTest {
+    fun emitUserDetailsFromService() = runBlockingTest {
 //        mockSuccessfulCase()
 //
-//        viewModel.getPlaylistsDetails(id)
+//        viewModel.getUserDetails(id)
 //        assertEquals(expected, viewModel.userDetails.getValueForTest())
     }
 
@@ -56,11 +47,11 @@ class GithubUserDetailsViewModelTest : BaseUnitTest() {
     }
 
     @Test
-    fun showLoaderWhilstLoadingPlaylistDetails() = runBlockingTest {
+    fun showLoaderWhilstLoadingUserDetails() = runBlockingTest {
         mockSuccessfulCase()
 //        viewModel.loader.captureValues {
 //
-//            viewModel.getPlaylistsDetails(id)
+//            viewModel.getUserDetails(id)
 //
 //            viewModel.userDetails.getValueForTest()
 //
@@ -69,12 +60,12 @@ class GithubUserDetailsViewModelTest : BaseUnitTest() {
     }
 
     @Test
-    fun closeLoaderAfterPlaylistDetailsLoad() {
+    fun closeLoaderAfterUserDetailsLoad() {
         mockSuccessfulCase()
 
 //        viewModel.loader.captureValues {
 //
-//            viewModel.getPlaylistsDetails(id)
+//            viewModel.getUserDetails(id)
 //
 //            viewModel.userDetails.getValueForTest()
 //
@@ -105,6 +96,6 @@ class GithubUserDetailsViewModelTest : BaseUnitTest() {
 
 //        viewModel = GithubUserDetailsViewModel(service)
 //
-//        viewModel.getPlaylistsDetails(id)
+//        viewModel.getUserDetails(id)
     }
 }

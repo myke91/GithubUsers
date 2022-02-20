@@ -18,11 +18,11 @@ class GithubUserRemoteDatasourceTest : BaseUnitTest() {
 
     private lateinit var datasource: GithubUserDatasource
     private val api: GithubUserApi = mock()
-    private val playlists = mock<List<GithubUserRaw>>()
+    private val users = mock<List<GithubUserRaw>>()
     private val exception = RuntimeException("Damn backend developer")
 
     @Test
-    fun fetchPlaylistFromAPI() = runBlockingTest {
+    fun fetchUsersFromAPI() = runBlockingTest {
         val datasource = GithubUsersRemoteDatasource(api)
 
         datasource.fetchGithubUsers(0, 20)
@@ -35,7 +35,7 @@ class GithubUserRemoteDatasourceTest : BaseUnitTest() {
     fun convertsValuesToFlowResultAndEmitsThem() = runBlockingTest {
         mockSuccessfulCase()
 
-//        assertEquals(Result.success(playlists), datasource.fetchUsers().first())
+//        assertEquals(Result.success(users), datasource.fetchUsers().first())
     }
 
 
@@ -54,7 +54,7 @@ class GithubUserRemoteDatasourceTest : BaseUnitTest() {
     }
 
     private suspend fun mockSuccessfulCase() {
-//        whenever(api.fetchAllUsers()).thenReturn(playlists)
+//        whenever(api.fetchAllUsers()).thenReturn(users)
 //        datasource = GithubUserDatasource(api)
     }
 }

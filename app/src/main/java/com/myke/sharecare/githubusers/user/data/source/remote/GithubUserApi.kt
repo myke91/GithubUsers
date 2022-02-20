@@ -9,5 +9,8 @@ import retrofit2.http.Query
 interface GithubUserApi {
 
     @GET("users")
-    suspend fun fetchAllUsers(@Query("since") page: Int? = 0, @Query("per_page") perPage:Int? = 20): Response<List<GithubUserRaw>>
+    suspend fun fetchAllUsers(
+        @Query("since") page: Int? = 0,
+        @Query("per_page") perPage: Int? = 20
+    ): Response<List<GithubUserRaw>>
 }

@@ -9,5 +9,6 @@ import retrofit2.http.Path
 interface GithubUserDetailsApi {
 
     @GET("users/{username}")
-    suspend fun fetchUserDetails(@Path("username") username: String): Response<GithubUserDetailsRaw>
+    suspend fun fetchUserDetails(@Path("username") username: String)
+    : Response<GithubUserDetailsRaw>
 }

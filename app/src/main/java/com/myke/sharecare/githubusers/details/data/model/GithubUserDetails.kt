@@ -10,5 +10,4 @@ data class GithubUserDetails(
     val location: String,
     val blog: String,
     val email: String
-
 )

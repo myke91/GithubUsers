@@ -2,13 +2,10 @@ package com.myke.sharecare.githubusers.details.viewmodel
 
 import androidx.lifecycle.*
 import com.myke.sharecare.githubusers.details.data.model.GithubUserDetails
-import com.myke.sharecare.githubusers.details.data.GithubUserDetailsRepository
-import com.myke.sharecare.githubusers.details.data.model.GithubUserDetailsRaw
 import com.myke.sharecare.githubusers.details.interactors.GetGithubUserDetailsUseCase
-import com.myke.sharecare.githubusers.user.data.model.GithubUserRaw
-import com.myke.sharecare.shared.utils.Resource
-import kotlinx.coroutines.flow.onEach
+import com.myke.sharecare.shared.result.DataState
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 class GithubUserDetailsViewModel @Inject constructor(private val usecase: GetGithubUserDetailsUseCase) :
@@ -18,17 +15,21 @@ class GithubUserDetailsViewModel @Inject constructor(private val usecase: GetGit
     val loader = MutableLiveData<Boolean>()
 
 
-    private val _userDetails = MutableLiveData<Resource<GithubUserDetails>>()
-    val userDetails: LiveData<Resource<GithubUserDetails>>
+    private val _userDetails = MutableLiveData<DataState<GithubUserDetails>>()
+    val userDetails: LiveData<DataState<GithubUserDetails>>
         get() = _userDetails
 
 
     fun getUserDetails(username: String) {
         viewModelScope.launch {
-            _userDetails.postValue(Resource.loading(null))
+            _userDetails.postValue(DataState.Loading)
             loader.postValue(true)
-            usecase.run(username).let {
-                _userDetails.postValue(Resource.success(it))
+            try {
+                usecase.run(username).let {
+                    _userDetails.postValue(it)
+                }
+            }catch (ex: Exception){
+                _userDetails.postValue(DataState.Error(ex))
             }
         }
     }

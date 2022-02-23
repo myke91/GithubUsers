@@ -265,5 +265,5 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="email" />
-    </androidx.cardview.widget.CardView>\
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

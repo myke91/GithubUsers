@@ -14,7 +14,7 @@ class GetGithubUsersUseCase @Inject constructor(private val repository: GithubUs
     BaseUseCaseWithOutParams<Flow<PagingData<GithubUser>>> {
 
     override suspend fun run(): Flow<PagingData<GithubUser>> {
-        return repository.getGithubUsers().map{ userRaw ->
+        return repository.getGithubUsers().map { userRaw ->
             userRaw.map {
                 GithubUser(user = it.login, it.avatarUrl, it.url)
             }

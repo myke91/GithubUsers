@@ -5,6 +5,7 @@ import com.myke.sharecare.githubusers.user.data.model.GithubUser
 import com.myke.sharecare.githubusers.user.data.GithubUserRepository
 import com.myke.sharecare.githubusers.user.interactors.GetGithubUsersUseCase
 import com.myke.sharecare.githubusers.user.viewmodel.GithubUserViewModel
+import com.myke.sharecare.githubusers.user.viewmodel.ViewType
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
 import com.myke.sharecare.githubusers.utils.captureValues
 import com.myke.sharecare.githubusers.utils.getValueForTest
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 
 import org.junit.Test
@@ -32,7 +34,7 @@ class GithubUserViewModelTest : BaseUnitTest() {
 
 
     @Test
-    fun `should get user list from usecase`() = runBlockingTest {
+    fun `should get user list from usecase`() = runTest {
         mockSuccessfulCase()
         viewModel.pagedUserList.first()
 
@@ -41,7 +43,7 @@ class GithubUserViewModelTest : BaseUnitTest() {
 
 
     @Test
-    fun `should emit error when receive error`() = runBlockingTest {
+    fun `should emit error when receive error`() = runTest {
         mockFailureCase()
 
         assertEquals(exception, viewModel.pagedUserList.first())
@@ -49,40 +51,52 @@ class GithubUserViewModelTest : BaseUnitTest() {
 
 
     @Test
-    fun `should show loader whilst loading`() = runBlockingTest {
+    fun `should show loader whilst loading`() = runTest {
         mockSuccessfulCase()
-//        viewModel.loader.captureValues {
-//            viewModel.users.getValueForTest()
-//
-//            assertEquals(true, values[0])
-//        }
+        viewModel.loader.captureValues {
+            viewModel.pagedUserList.first()
+
+            assertEquals(true, values[0])
+        }
     }
 
     @Test
-    fun `should close loader after users Load`() = runBlockingTest {
+    fun `should close loader after users Load`() = runTest {
         mockSuccessfulCase()
 
-//        viewModel.loader.captureValues {
-//            viewModel.users.getValueForTest()
-//
-//            assertEquals(false, values.last())
-//        }
+        viewModel.loader.captureValues {
+            viewModel.pagedUserList.first()
+
+            assertEquals(false, values.last())
+        }
     }
 
     @Test
-    fun `should close loader after error`() = runBlockingTest {
+    fun `should close loader after error`() = runTest {
         mockFailureCase()
 
-//        viewModel.loader.captureValues {
-//            viewModel.users.getValueForTest()
-//
-//            assertEquals(false, values.last())
-//        }
+        viewModel.loader.captureValues {
+            viewModel.pagedUserList.first()
+
+            assertEquals(false, values.last())
+        }
+    }
+
+    @Test
+    fun `should maintain list type when changed`(){
+        mockSuccessfulCase()
+
+        viewModel.currentView.value = ViewType.GRID
+        assertEquals(ViewType.GRID, viewModel.currentView.getValueForTest())
+
+        viewModel.currentView.value = ViewType.LIST
+
+        assertEquals(ViewType.LIST, viewModel.currentView.getValueForTest())
     }
 
 
     private fun mockSuccessfulCase() {
-        runBlockingTest {
+        runTest {
             whenever(usecase.run()).thenReturn(
                 flow {
                     emit(users)
@@ -95,7 +109,7 @@ class GithubUserViewModelTest : BaseUnitTest() {
     }
 
     private fun mockFailureCase() {
-        runBlockingTest {
+        runTest {
             whenever(usecase.run()).thenThrow(
                 exception
             )

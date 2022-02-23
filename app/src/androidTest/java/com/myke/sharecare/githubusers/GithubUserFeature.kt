@@ -1,30 +1,15 @@
 package com.myke.sharecare.githubusers
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.myke.sharecare.githubusers.user.di.idlingResource
-import com.schibsted.spain.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
-import com.schibsted.spain.barista.internal.matcher.DrawableMatcher.Companion.withDrawable
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.AllOf.allOf
-
 import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
-import org.junit.Rule
 
 
 class GithubUserFeature : BaseUITest() {
@@ -36,8 +21,6 @@ class GithubUserFeature : BaseUITest() {
 
     @Test
     fun displaysListOfUsers() {
-
-        assertRecyclerViewItemCount(R.id.users_list, 10)
 
         onView(
             allOf(
@@ -60,6 +43,16 @@ class GithubUserFeature : BaseUITest() {
     fun displaysLoaderWhileFetchingTheUsers() {
         IdlingRegistry.getInstance().unregister(idlingResource)
         assertDisplayed(R.id.loader)
+    }
+
+    @Test
+    fun showCorrectTypeOfList(){
+        assertDisplayed(R.id.nickname)
+        onView(withId(R.id.users_list_toolbar)).perform(click())
+
+        assertDisplayed(R.id.url)
+        onView(withId(R.id.users_list_toolbar)).perform(click())
+
     }
 
     @Test

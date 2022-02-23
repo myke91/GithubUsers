@@ -20,8 +20,8 @@ class GithubUserViewModel @Inject constructor(
     lateinit var pagedUserList: Flow<PagingData<GithubUser>>
 
     fun getUsers() {
-        loader.postValue(true)
         viewModelScope.launch {
+            loader.postValue(true)
             useCase.run().let {
                 pagedUserList = it
                 loader.postValue(false)

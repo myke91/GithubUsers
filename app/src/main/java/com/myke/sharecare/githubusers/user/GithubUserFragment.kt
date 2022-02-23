@@ -11,11 +11,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.myke.sharecare.githubusers.R
+import com.myke.sharecare.githubusers.databinding.FragmentUsersListBinding
 import com.myke.sharecare.githubusers.user.viewmodel.GithubUserViewModel
 import com.myke.sharecare.githubusers.user.viewmodel.GithubUserViewModelFactory
 import com.myke.sharecare.githubusers.user.viewmodel.ViewType
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_users_list.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +24,7 @@ import javax.inject.Inject
 class GithubUserFragment : Fragment() {
 
     lateinit var viewModel: GithubUserViewModel
+    lateinit var binding: FragmentUsersListBinding
 
     private var currentView: ViewType = ViewType.GRID
     lateinit var adapter: GithubUserListRecyclerViewAdapter
@@ -34,15 +35,15 @@ class GithubUserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_users_list, container, false)
+    ): View {
+        binding = FragmentUsersListBinding.inflate(layoutInflater)
 
         setupViewModel()
         observeLoader()
         observeError()
-        observeDataViewState()
+        observeDataState()
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +63,7 @@ class GithubUserFragment : Fragment() {
     private fun setupAdapterUI() {
         val layoutManager = GridLayoutManager(context, 2)
 
-        users_list.layoutManager = layoutManager
+        binding.usersList.layoutManager = layoutManager
 
         adapter = GithubUserListRecyclerViewAdapter { user ->
             val action =
@@ -70,18 +71,18 @@ class GithubUserFragment : Fragment() {
                     user
                 )
 
-            users_list.findNavController().navigate(action)
+            binding.usersList.findNavController().navigate(action)
         }
 
-        users_list.adapter = adapter
+        binding.usersList.adapter = adapter
 
     }
 
 
     private fun setupRecyclerViewSwitcher() {
-        myToolbar.inflateMenu(R.menu.menu)
-        myToolbar.menu.findItem(R.id.action_grid).setVisible(false)
-        myToolbar.setOnMenuItemClickListener {
+        binding.usersListToolbar.inflateMenu(R.menu.menu)
+        binding.usersListToolbar.menu.findItem(R.id.action_grid).setVisible(false)
+        binding.usersListToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_grid -> {
                     viewModel.switchView(ViewType.GRID)
@@ -101,11 +102,11 @@ class GithubUserFragment : Fragment() {
 
     fun showMenuItem(viewType: ViewType) {
         if (viewType == ViewType.GRID) {
-            myToolbar.menu.findItem(R.id.action_grid).setVisible(false)
-            myToolbar.menu.findItem(R.id.action_list).setVisible(true)
+            binding.usersListToolbar.menu.findItem(R.id.action_grid).isVisible = false
+            binding.usersListToolbar.menu.findItem(R.id.action_list).isVisible = true
         } else {
-            myToolbar.menu.findItem(R.id.action_grid).setVisible(true)
-            myToolbar.menu.findItem(R.id.action_list).setVisible(false)
+            binding.usersListToolbar.menu.findItem(R.id.action_grid).isVisible = true
+            binding.usersListToolbar.menu.findItem(R.id.action_list).isVisible = false
         }
 
     }
@@ -113,15 +114,15 @@ class GithubUserFragment : Fragment() {
 
     private fun observeError() {
         viewModel.errorMessage.observe(this, {
-            Snackbar.make(users_list, it, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.usersList, it, Snackbar.LENGTH_LONG).show()
         })
     }
 
     private fun observeLoader() {
         viewModel.loader.observe(this as LifecycleOwner, { loading ->
             when (loading) {
-                true -> loader.visibility = View.VISIBLE
-                else -> loader.visibility = View.GONE
+                true -> binding.loader.visibility = View.VISIBLE
+                else -> binding.loader.visibility = View.GONE
             }
 
         })
@@ -133,15 +134,15 @@ class GithubUserFragment : Fragment() {
     }
 
 
-    private fun observeDataViewState() {
+    private fun observeDataState() {
         viewModel.currentView.observe(this as LifecycleOwner) {
             if (it == ViewType.LIST) {
                 adapter.setItemViewType(ViewType.LIST.name)
-                users_list.layoutManager = LinearLayoutManager(context)
+                binding.usersList.layoutManager = LinearLayoutManager(context)
                 currentView = ViewType.LIST
             } else {
                 adapter.setItemViewType(ViewType.GRID.name)
-                users_list.layoutManager = GridLayoutManager(context, 2)
+                binding.usersList.layoutManager = GridLayoutManager(context, 2)
                 currentView = ViewType.GRID
             }
         }

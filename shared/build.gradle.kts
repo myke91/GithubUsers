@@ -45,7 +45,12 @@ dependencies {
     implementation(Deps.MATERIAL)
     implementation(Deps.PICASSO)
 
+
+    //courotines
+    implementation(Deps.KOTLIN_COROUTINE_CORE)
+    implementation(Deps.KOTLIN_COROUTINE_ANDROID)
+
     testImplementation(Deps.JUNIT)
-    androidTestImplementation(Deps.JUNIT_EXT)
+    androidTestImplementation(Deps.JUNIT_KTX)
     androidTestImplementation(Deps.ESPRESSO_CORE)
 }

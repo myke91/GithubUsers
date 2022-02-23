@@ -1,9 +1,8 @@
 package com.myke.sharecare.githubusers.details.data.source
 
 import com.myke.sharecare.githubusers.details.data.model.GithubUserDetailsRaw
-import com.myke.sharecare.githubusers.user.data.model.GithubUserRaw
-import retrofit2.Response
+import com.myke.sharecare.shared.result.DataState
 
 interface GithubUserDetailsDatasource {
-    suspend fun getGithubUserDetails(username: String): Response<GithubUserDetailsRaw>
+    suspend fun getGithubUserDetails(username: String): DataState<GithubUserDetailsRaw>
 }

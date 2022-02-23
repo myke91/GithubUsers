@@ -1,9 +1,13 @@
+//import java.lang.System.load
+//import java.util.Properties
+//import java.io.FileInputStream
+
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
 }
 
@@ -24,6 +28,8 @@ android {
         versionName(AppConfig.VERSION_NAME)
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
         buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+        buildConfigField("String", "GITHUB_CLIENT_ID", "\"96d1a440f92be00ad01d\"")
+        buildConfigField("String", "GITHUB_CLIENT_SECRET", "\"4012e4809fafbc5127e565d95372ae5e462c9c06\"")
 
 
     }
@@ -39,7 +45,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        dataBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -128,10 +133,7 @@ dependencies {
     //android instrumentation
     androidTestImplementation(Deps.TEST_RUNNER)
     androidTestImplementation(Deps.ANDROID_TEST_JUNIT)
-    androidTestImplementation(Deps.JUNIT_EXT)
     androidTestImplementation(Deps.ESPRESSO_CORE)
-    androidTestImplementation(Deps.ESPRESSO_CONTRIB)
-    debugImplementation(Deps.FRAGMENT_TESTING)
 
     androidTestImplementation(Deps.JW_IDLING_RESOURCE)
     androidTestImplementation(Deps.BARISTA) {

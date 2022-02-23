@@ -29,7 +29,6 @@ object Vers {
     const val androidTestJunitVersion = "1.1.3"
     const val junitKtxVersion = "1.1.3"
     const val gradleVersion = "4.2.2"
-    const val fragmentVersion = "1.4.1"
     const val mockitoKotlinVersion = "2.1.0"
     const val baristaVersion = "3.6.0"
     const val pagingVersion = "3.1.0"
@@ -89,14 +88,12 @@ object Deps {
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Vers.kotlinxCourotineTestVersion}"
     const val TEST_RUNNER = "androidx.test:runner:${Vers.testRunnerVersion}"
     const val ANDROID_TEST_JUNIT = "androidx.test.ext:junit:${Vers.androidTestJunitVersion}"
-    const val JUNIT_EXT = "androidx.test.ext:junit-ktx:${Vers.junitKtxVersion}"
+    const val JUNIT_KTX = "androidx.test.ext:junit-ktx:${Vers.junitKtxVersion}"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Vers.espressoVersion}"
-    const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib:${Vers.espressoVersion}"
     const val ESPRESSO_IDLING_RESOURCE =
         "androidx.test.espresso:espresso-idling-resource:${Vers.espressoVersion}"
     const val JW_IDLING_RESOURCE =
         "com.jakewharton.espresso:okhttp3-idling-resource:${Vers.jwIdlingResourceVersion}"
-    const val FRAGMENT_TESTING = "androidx.fragment:fragment-testing:${Vers.fragmentVersion}"
 }
 
 object AppConfig {

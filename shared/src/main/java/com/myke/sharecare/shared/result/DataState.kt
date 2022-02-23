@@ -22,39 +22,44 @@ import androidx.lifecycle.MutableLiveData
  * A generic class that holds a value with its loading status.
  * @param <T>
  */
-sealed class Result<out R> {
+sealed class DataState<out R> {
 
-    data class Success<out T>(val data: T) : Result<T>()
-    data class Error(val exception: Exception) : Result<Nothing>()
-    object Loading : Result<Nothing>()
+    data class Success<out T>(val data: T) : DataState<T>()
+    data class Error(val exception: Exception) : DataState<Nothing>()
+    object Loading : DataState<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
             is Error -> "Error[exception=$exception]"
             Loading -> "Loading"
+            else -> {""}
         }
     }
 }
 
-/**
- * `true` if [Result] is of type [Success] & holds non-null [Success.data].
- */
-val Result<*>.succeeded
-    get() = this is Result.Success && data != null
 
-fun <T> Result<T>.successOr(fallback: T): T {
-    return (this as? Result.Success<T>)?.data ?: fallback
+/**
+ * `true` if [DataState] is of type [Success] & holds non-null [Success.data].
+ */
+val DataState<*>.succeeded
+    get() = this is DataState.Success && data != null
+
+fun <T> DataState<T>.successOr(fallback: T): T {
+    return (this as? DataState.Success<T>)?.data ?: fallback
 }
 
-val <T> Result<T>.data: T?
-    get() = (this as? Result.Success)?.data
+val <T> DataState<T>.data: T?
+    get() = (this as? DataState.Success)?.data
+
+val <T> DataState<T>.exception: Exception?
+    get() = (this as? DataState.Error)?.exception
 
 /**
- * Updates value of [liveData] if [Result] is of type [Success]
+ * Updates value of [liveData] if [DataState] is of type [Success]
  */
-inline fun <reified T> Result<T>.updateOnSuccess(liveData: MutableLiveData<T>) {
-    if (this is Result.Success) {
+inline fun <reified T> DataState<T>.updateOnSuccess(liveData: MutableLiveData<T>) {
+    if (this is DataState.Success) {
         liveData.value = data
     }
 }

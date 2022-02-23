@@ -5,25 +5,29 @@ import com.myke.sharecare.githubusers.user.data.model.GithubUserRaw
 import com.myke.sharecare.githubusers.user.data.source.GithubUserDatasource
 import com.myke.sharecare.githubusers.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
+import com.myke.sharecare.shared.result.DataState
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import retrofit2.Response
 import java.lang.RuntimeException
 
 class GithubUserRemoteDatasourceTest : BaseUnitTest() {
 
-    private lateinit var datasource: GithubUserDatasource
+    private lateinit var datasource: GithubUsersRemoteDatasource
     private val api: GithubUserApi = mock()
-    private val users = mock<List<GithubUserRaw>>()
+    private val users = mock<DataState<List<GithubUserRaw>>>()
+    private val usersResponse = mock<Response<List<GithubUserRaw>>>()
     private val exception = RuntimeException("Damn backend developer")
 
     @Test
-    fun fetchUsersFromAPI() = runBlockingTest {
-        val datasource = GithubUsersRemoteDatasource(api)
+    fun `should fetch users from API`() = runTest {
+        mockSuccessfulCase()
 
         datasource.fetchGithubUsers(0, 20)
 
@@ -32,16 +36,16 @@ class GithubUserRemoteDatasourceTest : BaseUnitTest() {
     }
 
     @Test
-    fun convertsValuesToFlowResultAndEmitsThem() = runBlockingTest {
+    fun `should convert api response to data state and return them`() = runTest {
         mockSuccessfulCase()
 
-//        assertEquals(Result.success(users), datasource.fetchUsers().first())
+        assertEquals(users, datasource.fetchGithubUsers(0, 20))
     }
 
 
 
     @Test
-    fun emitsErrorResultWhenNetworkFails() = runBlockingTest {
+    fun `should emit error result when network fails`() = runTest {
         mockFailureCase()
 
 //        assertEquals("something went wrong", datasource.fetchUsers().first().exceptionOrNull()?.message)
@@ -50,11 +54,11 @@ class GithubUserRemoteDatasourceTest : BaseUnitTest() {
     private suspend fun mockFailureCase() {
         whenever(api.fetchAllUsers()).thenThrow(exception)
 
-//        datasource = GithubUserDatasource(api)
+        datasource = GithubUsersRemoteDatasource(api)
     }
 
-    private suspend fun mockSuccessfulCase() {
-//        whenever(api.fetchAllUsers()).thenReturn(users)
-//        datasource = GithubUserDatasource(api)
+    private suspend fun mockSuccessfulCase() = runTest{
+        whenever(api.fetchAllUsers()).thenReturn(usersResponse)
+        datasource = GithubUsersRemoteDatasource(api)
     }
 }

@@ -1,7 +1,7 @@
 package com.myke.sharecare.githubusers.user.di
 
-import androidx.viewbinding.BuildConfig
 import com.jakewharton.espresso.OkHttp3IdlingResource
+import com.myke.sharecare.githubusers.BuildConfig
 import com.myke.sharecare.githubusers.user.business.GithubUserMapper
 import com.myke.sharecare.githubusers.user.data.GithubUserRepository
 import com.myke.sharecare.githubusers.user.data.source.GithubUserDatasource
@@ -40,8 +40,8 @@ class GithubUserModule {
 
 
         return Retrofit.Builder()
-            .baseUrl("https://api.github.com/") //BuildConfig.BASE_URL
-            .client(OkHttpClient())
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
@@ -61,8 +61,8 @@ class GithubUserModule {
             requestBuilder.addHeader(
                 "Authorization",
                 Credentials.basic(
-                    "96d1a440f92be00ad01d",
-                    "4012e4809fafbc5127e565d95372ae5e462c9c06"
+                    BuildConfig.GITHUB_CLIENT_ID,
+                    BuildConfig.GITHUB_CLIENT_SECRET
                 )
             )
             chain.proceed(requestBuilder.build())

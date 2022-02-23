@@ -17,12 +17,26 @@ import org.junit.Test
 class GithubUserDetailsFeature : BaseUITest() {
 
     @Test
-    fun displaysUserNameAndDetails() {
+    fun displaysProvidedUserDetails() {
         navigationToUserDetails(0)
 
-        assertDisplayed(R.id.avatar)
+        assertDisplayed(R.id.user_image)
+
+        assertDisplayed(R.id.username)
+
+        assertDisplayed(R.id.profile_url)
+
+        assertDisplayed(R.id.name)
 
         assertDisplayed(R.id.twitter_username)
+
+        assertDisplayed(R.id.company)
+
+        assertDisplayed(R.id.location)
+
+        assertDisplayed(R.id.blog)
+
+        assertDisplayed(R.id.email)
     }
 
 
@@ -37,25 +51,11 @@ class GithubUserDetailsFeature : BaseUITest() {
     }
 
     @Test
-    fun hidesLoader() {
+    fun hidesLoader() = runBlocking {
         navigationToUserDetails(0)
+        delay(2000)
 
         assertNotDisplayed(R.id.details_loader)
-    }
-
-    @Test
-    fun displaysErrorMessageWhenNetworkFails() {
-        navigationToUserDetails(1)
-
-        assertDisplayed(R.string.generic_error)
-    }
-
-    @Test
-    fun hidesErrorMessage() = runBlocking {
-        navigationToUserDetails(3)
-        delay(3000)
-
-        assertNotExist(R.string.generic_error)
     }
 
     private fun navigationToUserDetails(row: Int) {

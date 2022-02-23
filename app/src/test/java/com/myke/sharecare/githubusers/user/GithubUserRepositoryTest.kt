@@ -11,6 +11,7 @@ import com.myke.sharecare.githubusers.user.data.source.GithubUserDatasource
 import com.myke.sharecare.githubusers.user.data.source.remote.GithubPagingSource
 import com.myke.sharecare.githubusers.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.githubusers.utils.BaseUnitTest
+import com.myke.sharecare.shared.result.DataState
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -19,6 +20,7 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import retrofit2.Response
 import java.lang.RuntimeException
@@ -28,14 +30,15 @@ class GithubUserRepositoryTest : BaseUnitTest() {
     private lateinit var repository: GithubUserRepository
     private val datasource: GithubUsersRemoteDatasource = mock()
     private val pagingSource: GithubPagingSource = mock()
-    private val users = mock<PagingData<List<GithubUser>>>()
+    private val pagedUsers = mock<PagingData<List<GithubUser>>>()
+    private val users = mock<List<GithubUserRaw>>()
     private val exception = RuntimeException("something went wrong")
     private val usersRawResponse = mock<Response<List<GithubUserRaw>>>()
     private val usersRawPagingData = mock<PagingData<List<GithubUserRaw>>>()
     private val mapper: GithubUserMapper = mock()
 
     @Test
-    fun getGithubUsersFromPagingSource() = runBlockingTest {
+    fun `should get github users from paging source`() = runTest {
         mockSuccessfulCase()
 
         repository.getGithubUsers()
@@ -44,7 +47,7 @@ class GithubUserRepositoryTest : BaseUnitTest() {
     }
 
     @Test
-    fun emitPagingDataFromPagingSource() = runBlockingTest {
+    fun `should emit paging data from paging source`() = runTest {
         mockSuccessfulCase()
 
         assertEquals(usersRawPagingData, repository.getGithubUsers().first())
@@ -53,7 +56,7 @@ class GithubUserRepositoryTest : BaseUnitTest() {
 
 
     @Test
-    fun propagateErrors() = runBlockingTest {
+    fun `should propagate errors`() = runTest {
        mockFailureCase()
 
         assertEquals(exception, repository.getGithubUsers().first())
@@ -61,7 +64,7 @@ class GithubUserRepositoryTest : BaseUnitTest() {
 
     private suspend fun mockSuccessfulCase() {
         whenever(datasource.fetchGithubUsers(0, 20)).thenReturn(
-            usersRawResponse
+            DataState.Success(users)
         )
 
         whenever(repository.getGithubUsers()).thenReturn(

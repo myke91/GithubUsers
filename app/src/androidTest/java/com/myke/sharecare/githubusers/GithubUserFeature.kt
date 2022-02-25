@@ -5,7 +5,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import com.myke.sharecare.githubusers.user.di.idlingResource
+import com.myke.sharecare.feature.user.di.idlingResource
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import org.hamcrest.core.AllOf.allOf
@@ -41,7 +41,7 @@ class GithubUserFeature : BaseUITest() {
 
     @Test
     fun displaysLoaderWhileFetchingTheUsers() {
-        IdlingRegistry.getInstance().unregister(idlingResource)
+        IdlingRegistry.getInstance().unregister(com.myke.sharecare.feature.user.di.idlingResource)
         assertDisplayed(R.id.loader)
     }
 

@@ -13,6 +13,9 @@
         <entry key="app/src/main/res/layout/viewholder_movie_item.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.3541666666666667" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.19739583333333333" />
+        <entry key="details/src/main/res/layout/fragment_user_detail.xml" value="0.24114583333333334" />
+        <entry key="user/src/main/res/layout/fragment_users_list.xml" value="0.24114583333333334" />
+        <entry key="user/src/main/res/menu/menu.xml" value="0.24114583333333334" />
       </map>
     </option>
   </component>

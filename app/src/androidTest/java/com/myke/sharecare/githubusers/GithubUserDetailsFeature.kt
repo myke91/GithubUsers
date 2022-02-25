@@ -5,10 +5,9 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import com.myke.sharecare.githubusers.user.di.idlingResource
+import com.myke.sharecare.feature.user.di.idlingResource
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
-import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotExist
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.core.AllOf
@@ -42,7 +41,7 @@ class GithubUserDetailsFeature : BaseUITest() {
 
     @Test
     fun displaysLoaderWhileFetchingTheUserDetails() = runBlocking {
-        IdlingRegistry.getInstance().unregister(idlingResource)
+        IdlingRegistry.getInstance().unregister(com.myke.sharecare.feature.user.di.idlingResource)
 
         delay(2000)
         navigationToUserDetails(0)

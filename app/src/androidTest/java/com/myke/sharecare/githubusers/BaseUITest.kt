@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.myke.sharecare.githubusers.user.di.idlingResource
+import com.myke.sharecare.feature.user.di.idlingResource
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
@@ -23,12 +23,12 @@ open class BaseUITest {
 
     @Before
     fun setup() {
-        IdlingRegistry.getInstance().register(idlingResource)
+        IdlingRegistry.getInstance().register(com.myke.sharecare.feature.user.di.idlingResource)
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource)
+        IdlingRegistry.getInstance().unregister(com.myke.sharecare.feature.user.di.idlingResource)
     }
 
     fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {

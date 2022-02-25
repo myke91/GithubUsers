@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_navigation"
+    app:startDestination="@id/githubUserDetailFragment">
+
+    <fragment
+        android:id="@+id/githubUserDetailFragment"
+        android:name="com.myke.sharecare.feature.details.GithubUserDetailsFragment"
+        android:label="GithubUserDetailFragment">
+        <argument
+            android:name="user"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>

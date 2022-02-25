@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+drawable default_avatar
+drawable grid
+drawable menu
+id action_githubUserFragment_to_githubUserDetailFragment
+id action_grid
+id action_list
+id avatar
+id githubUserFragment
+id list_navigation
+id loader
+id nickname
+id url
+id users_list
+id users_list_toolbar
+layout fragment_users_list
+layout user_grid_item
+layout user_list_item
+menu menu
+navigation list_navigation
+string app_name
+string button
+string generic_error
+string grid
+string list
+string user_image

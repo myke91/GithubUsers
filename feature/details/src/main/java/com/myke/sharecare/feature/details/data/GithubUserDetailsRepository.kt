@@ -1,8 +1,8 @@
 package com.myke.sharecare.feature.details.data
 
-import com.myke.sharecare.feature.details.data.model.GithubUserDetailsRaw
+import com.myke.sharecare.shared.data.entities.GithubUserDetailsRaw
 import com.myke.sharecare.feature.details.data.source.GithubUserDetailsDatasource
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.result.DataState
 import javax.inject.Inject
 
 class GithubUserDetailsRepository @Inject constructor(

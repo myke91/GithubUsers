@@ -1,7 +1,7 @@
 package com.myke.sharecare.feature.user.business
 
-import com.myke.sharecare.feature.user.data.model.GithubUser
-import com.myke.sharecare.feature.user.data.model.GithubUserRaw
+import com.myke.sharecare.shared.data.entities.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
 
 
 class GithubUserMapper : Function1<List<GithubUserRaw>, List<GithubUser>> {

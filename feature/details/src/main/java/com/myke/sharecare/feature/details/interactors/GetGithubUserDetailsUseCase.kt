@@ -1,8 +1,8 @@
 package com.myke.sharecare.feature.details.interactors
 
 import com.myke.sharecare.feature.details.data.GithubUserDetailsRepository
-import com.myke.sharecare.feature.details.data.model.GithubUserDetails
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.entities.GithubUserDetails
+import com.myke.sharecare.shared.data.result.DataState
 import com.myke.sharecare.shared.usecasetypes.BaseUseCaseWithParams
 import javax.inject.Inject
 

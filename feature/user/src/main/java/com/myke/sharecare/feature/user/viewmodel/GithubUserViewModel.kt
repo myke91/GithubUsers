@@ -2,7 +2,7 @@ package com.myke.sharecare.feature.user.viewmodel
 
 import androidx.lifecycle.*
 import androidx.paging.*
-import com.myke.sharecare.feature.user.data.model.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUser
 import com.myke.sharecare.feature.user.interactors.GetGithubUsersUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

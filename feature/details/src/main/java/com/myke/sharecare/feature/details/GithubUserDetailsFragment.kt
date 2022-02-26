@@ -9,11 +9,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import com.myke.sharecare.feature.details.data.model.GithubUserDetails
+import com.myke.sharecare.shared.data.entities.GithubUserDetails
 import com.myke.sharecare.feature.details.databinding.FragmentUserDetailBinding
 import com.myke.sharecare.feature.details.viewmodel.GithubUserDetailsViewModel
 import com.myke.sharecare.feature.details.viewmodel.GithubUserDetailsViewModelFactory
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.result.DataState
 import com.myke.sharecare.shared.utils.loadImageUrl
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

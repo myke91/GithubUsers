@@ -1,4 +1,5 @@
 object Vers {
+    const val roomPagingVersion = "2.5.0-alpha01"
     const val timberVersion = "4.7.1"
     const val kotlinVersion = "1.6.10"
     const val appcompatVersion = "1.3.1"
@@ -32,9 +33,14 @@ object Vers {
     const val mockitoKotlinVersion = "2.1.0"
     const val baristaVersion = "3.6.0"
     const val pagingVersion = "3.1.0"
+    const val roomVersion = "2.4.2"
 }
 
 object Deps {
+    const val ROOM_KTX = "androidx.room:room-ktx:${Vers.roomVersion}"
+    const val ROOM_PAGING = "androidx.room:room-paging:${Vers.roomPagingVersion}"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:${Vers.roomVersion}"
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:${Vers.roomVersion}"
     const val PAGING = "androidx.paging:paging-runtime-ktx:${Vers.pagingVersion}"
     const val TIMBER = "com.jakewharton.timber:timber:${Vers.timberVersion}"
     const val HILT_ANDROID_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:${Vers.hiltVersion}"

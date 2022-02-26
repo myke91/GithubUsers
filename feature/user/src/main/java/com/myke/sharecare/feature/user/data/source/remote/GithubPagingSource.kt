@@ -3,8 +3,8 @@ package com.myke.sharecare.feature.user.data.source.remote
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.myke.sharecare.feature.user.data.GithubUserRepository.Companion.NETWORK_PAGE_SIZE
-import com.myke.sharecare.feature.user.data.model.GithubUserRaw
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
+import com.myke.sharecare.shared.data.result.DataState
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,6 +1,6 @@
 package com.myke.sharecare.feature.user.data.source.remote
 
-import com.myke.sharecare.feature.user.data.model.GithubUserRaw
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

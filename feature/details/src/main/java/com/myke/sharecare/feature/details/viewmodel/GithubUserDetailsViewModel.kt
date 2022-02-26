@@ -1,9 +1,9 @@
 package com.myke.sharecare.feature.details.viewmodel
 
 import androidx.lifecycle.*
-import com.myke.sharecare.feature.details.data.model.GithubUserDetails
+import com.myke.sharecare.shared.data.entities.GithubUserDetails
 import com.myke.sharecare.feature.details.interactors.GetGithubUserDetailsUseCase
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.result.DataState
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject

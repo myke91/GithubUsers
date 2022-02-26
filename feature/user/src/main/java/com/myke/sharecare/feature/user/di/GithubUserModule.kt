@@ -5,9 +5,11 @@ import com.myke.sharecare.feature.user.BuildConfig
 import com.myke.sharecare.feature.user.business.GithubUserMapper
 import com.myke.sharecare.feature.user.data.GithubUserRepository
 import com.myke.sharecare.feature.user.data.source.GithubUserDatasource
+import com.myke.sharecare.feature.user.data.source.local.GithubUsersLocalDatasource
 import com.myke.sharecare.feature.user.data.source.remote.GithubUserApi
 import com.myke.sharecare.feature.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.feature.user.interactors.GetGithubUsersUseCase
+import com.myke.sharecare.shared.database.GithubUserDao
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -95,12 +97,18 @@ class GithubUserModule {
 
     @Provides
     fun githubUsersRepository(
-        datasource: GithubUserDatasource
-    ): GithubUserRepository = GithubUserRepository(datasource)
+        service: GithubUsersRemoteDatasource,
+        database: GithubUsersLocalDatasource
+    ): GithubUserRepository = GithubUserRepository(service, database)
 
     @Provides
-    fun githubUsersDatasource(api: GithubUserApi): GithubUserDatasource =
+    fun githubUsersRemoteDatasource(api: GithubUserApi): GithubUsersRemoteDatasource =
         GithubUsersRemoteDatasource(api)
+
+    @Provides
+    fun githubUsersLocalDatasource(usersDao: GithubUserDao): GithubUsersLocalDatasource =
+        GithubUsersLocalDatasource(usersDao)
+
 
 
     @Provides

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.myke.sharecare.feature.user.data.model.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUser
 import com.myke.sharecare.feature.user.databinding.UserGridItemBinding
 import com.myke.sharecare.feature.user.databinding.UserListItemBinding
 import com.myke.sharecare.feature.user.viewmodel.ViewType

@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.myke.sharecare.browsr.base.usecasetypes.BaseUseCaseWithOutParams
 import com.myke.sharecare.feature.user.data.GithubUserRepository
-import com.myke.sharecare.feature.user.data.model.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUser
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

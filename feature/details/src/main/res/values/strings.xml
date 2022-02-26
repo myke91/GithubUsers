@@ -4,5 +4,5 @@
     <string name="button">view-type</string>
     <string name="grid">Grid View</string>
     <string name="list">List View</string>
-    <string name="new_string">NEw String</string>
+    <string name="title_details">Github User Details</string>
 </resources>

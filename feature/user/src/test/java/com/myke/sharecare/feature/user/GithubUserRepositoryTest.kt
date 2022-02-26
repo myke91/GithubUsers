@@ -2,13 +2,13 @@ package com.myke.sharecare.feature.user
 
 import androidx.paging.PagingData
 import com.myke.sharecare.feature.user.business.GithubUserMapper
-import com.myke.sharecare.feature.user.data.model.GithubUser
-import com.myke.sharecare.feature.user.data.model.GithubUserRaw
+import com.myke.sharecare.shared.data.entities.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
 import com.myke.sharecare.feature.user.data.GithubUserRepository
 import com.myke.sharecare.feature.user.data.source.remote.GithubPagingSource
 import com.myke.sharecare.feature.user.data.source.remote.GithubUsersRemoteDatasource
-import com.myke.sharecare.githubusers.utils.BaseUnitTest
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.utils.BaseUnitTest
+import com.myke.sharecare.shared.data.result.DataState
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -70,7 +70,7 @@ class GithubUserRepositoryTest : BaseUnitTest() {
         )
 
 
-        repository = com.myke.sharecare.feature.user.data.GithubUserRepository(datasource)
+        repository = GithubUserRepository(datasource)
     }
 
     private suspend fun mockFailureCase() {
@@ -78,6 +78,6 @@ class GithubUserRepositoryTest : BaseUnitTest() {
            exception
         )
 
-        repository = com.myke.sharecare.feature.user.data.GithubUserRepository(datasource)
+        repository = GithubUserRepository(datasource)
     }
 }

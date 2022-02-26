@@ -1,13 +1,13 @@
 package com.myke.sharecare.feature.details
 
-import com.myke.sharecare.feature.details.data.model.GithubUserDetails
+import com.myke.sharecare.shared.data.entities.GithubUserDetails
 import com.myke.sharecare.feature.details.interactors.GetGithubUserDetailsUseCase
 import com.myke.sharecare.feature.details.viewmodel.GithubUserDetailsViewModel
-import com.myke.sharecare.githubusers.utils.BaseUnitTest
-import com.myke.sharecare.githubusers.utils.captureValues
-import com.myke.sharecare.githubusers.utils.getValueForTest
-import com.myke.sharecare.shared.result.DataState
-import com.myke.sharecare.shared.result.exception
+import com.myke.sharecare.shared.utils.BaseUnitTest
+import com.myke.sharecare.shared.data.result.DataState
+import com.myke.sharecare.shared.data.result.exception
+import com.myke.sharecare.shared.utils.captureValues
+import com.myke.sharecare.shared.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify

@@ -16,6 +16,11 @@ android {
         consumerProguardFiles("consumer-rules.pro")
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+
+        buildTypes.forEach {
+            it.buildConfigField(type = "String", name = "GITHUB_USERS_DATABASE_NAME", value = "\"github-users-db\"")
+            it.buildConfigField(type = "int", name = "GITHUB_USERS_DATABASE_VERSION", value = "1")
+        }
     }
 
     buildTypes {
@@ -39,6 +44,12 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+//    java.sourceSets.create("src/test/java")
+
+    sourceSets.getByName("test") {
+        java.srcDir("src/test/java")
     }
 }
 
@@ -96,8 +107,12 @@ dependencies {
     // Timber - Logger
     implementation(Deps.TIMBER)
 
-    // Testing Navigation
-    androidTestImplementation(Deps.NAV_TESTING)
+    //room
+    implementation(Deps.ROOM_RUNTIME)
+    kapt(Deps.ROOM_COMPILER)
+    implementation(Deps.ROOM_PAGING)
+    implementation(Deps.ROOM_KTX)
+
 
 
     //test

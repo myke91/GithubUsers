@@ -1,8 +1,8 @@
 package com.myke.sharecare.feature.user.data.source.remote
 
-import com.myke.sharecare.feature.user.data.model.GithubUserRaw
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
 import com.myke.sharecare.feature.user.data.source.GithubUserDatasource
-import com.myke.sharecare.shared.result.DataState
+import com.myke.sharecare.shared.data.result.DataState
 import com.myke.sharecare.shared.utils.stringSuspending
 import javax.inject.Inject
 

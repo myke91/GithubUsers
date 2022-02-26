@@ -1,13 +1,13 @@
 package com.myke.sharecare.feature.user
 
 import androidx.paging.PagingData
-import com.myke.sharecare.feature.user.data.model.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUser
 import com.myke.sharecare.feature.user.interactors.GetGithubUsersUseCase
 import com.myke.sharecare.feature.user.viewmodel.GithubUserViewModel
 import com.myke.sharecare.feature.user.viewmodel.ViewType
-import com.myke.sharecare.githubusers.utils.BaseUnitTest
-import com.myke.sharecare.githubusers.utils.captureValues
-import com.myke.sharecare.githubusers.utils.getValueForTest
+import com.myke.sharecare.shared.utils.BaseUnitTest
+import com.myke.sharecare.shared.utils.captureValues
+import com.myke.sharecare.shared.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify

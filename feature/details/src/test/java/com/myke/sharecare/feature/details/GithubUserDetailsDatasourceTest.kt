@@ -1,9 +1,10 @@
 package com.myke.sharecare.feature.details
 
-import com.myke.sharecare.feature.details.data.model.GithubUserDetailsRaw
+import com.myke.sharecare.shared.data.entities.GithubUserDetailsRaw
 import com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsApi
 import com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsRemoteDatasource
-import com.myke.sharecare.githubusers.utils.BaseUnitTest
+import com.myke.sharecare.shared.data.result.DataState
+import com.myke.sharecare.shared.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -15,10 +16,11 @@ import retrofit2.Response
 
 class GithubUserDetailsDatasourceTest : BaseUnitTest() {
 
-    lateinit var datasource: com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsRemoteDatasource
-    private val api: com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsApi = mock()
-    private val user = mock<com.myke.sharecare.feature.details.data.model.GithubUserDetailsRaw>()
-    private val expected: Response<com.myke.sharecare.feature.details.data.model.GithubUserDetailsRaw> = mock()
+    lateinit var datasource: GithubUserDetailsRemoteDatasource
+    private val api: GithubUserDetailsApi = mock()
+    private val user = mock<GithubUserDetailsRaw>()
+    private val expectedResponse: Response<GithubUserDetailsRaw> = mock()
+    private val expected: DataState<GithubUserDetailsRaw> = mock()
     private val exception = Exception("")
 
     private val username = "mojombo"
@@ -49,25 +51,15 @@ class GithubUserDetailsDatasourceTest : BaseUnitTest() {
     }
 
     private suspend fun mockSuccessfulCase() {
-        whenever(api.fetchUserDetails(username)).thenReturn(
-            expected
-        )
+        whenever(api.fetchUserDetails(username)).thenReturn(expectedResponse)
 
-        datasource =
-            com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsRemoteDatasource(
-                api
-            )
+        datasource = GithubUserDetailsRemoteDatasource(api)
     }
 
     private suspend fun mockFailureCase() {
-        whenever(api.fetchUserDetails(username)).thenThrow(
-            exception
-        )
+        whenever(api.fetchUserDetails(username)).thenThrow(exception)
 
-        datasource =
-            com.myke.sharecare.feature.details.data.source.remote.GithubUserDetailsRemoteDatasource(
-                api
-            )
+        datasource = GithubUserDetailsRemoteDatasource(api)
     }
 
 }

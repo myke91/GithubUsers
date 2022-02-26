@@ -50,7 +50,7 @@ dependencies {
     //jetpack navigation
     implementation(Deps.NAV_FRAGMENT)
     implementation(Deps.NAV_UI_KTX)
-
+    implementation(Deps.NAV_DYNAMIC_FEATURES)
 
     //DI (Hilt)
     implementation(Deps.HILT)

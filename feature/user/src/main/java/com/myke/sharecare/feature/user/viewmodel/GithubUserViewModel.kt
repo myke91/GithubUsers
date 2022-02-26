@@ -32,8 +32,4 @@ class GithubUserViewModel @Inject constructor(
     fun switchView(viewType: ViewType) {
         currentView.value = viewType
     }
-
-
-
-
 }

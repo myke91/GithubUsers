@@ -57,4 +57,24 @@ dependencies {
     kapt(Deps.HILT_COMPILER)
 //    kapt(Deps.hiltx_compiler)
 
+
+
+    //test
+    testImplementation(Deps.JUNIT)
+    testImplementation(Deps.MOCKITO_CORE)
+    testImplementation(Deps.CORE_TESTING)
+    testImplementation(Deps.MOCKITO_INLINE)
+    testImplementation(Deps.MOCKITO_KOTLIN)
+    testImplementation(Deps.KOTLINX_COROUTINE_TEST)
+
+    //android instrumentation
+    androidTestImplementation(Deps.TEST_RUNNER)
+    androidTestImplementation(Deps.ANDROID_TEST_JUNIT)
+    androidTestImplementation(Deps.ESPRESSO_CORE)
+
+    androidTestImplementation(Deps.JW_IDLING_RESOURCE)
+    androidTestImplementation(Deps.BARISTA) {
+        exclude("org.jetbrains", "kotlin")
+    }
+
 }

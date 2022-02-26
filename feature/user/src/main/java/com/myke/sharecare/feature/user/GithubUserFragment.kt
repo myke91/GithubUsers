@@ -146,10 +146,4 @@ class GithubUserFragment : Fragment() {
             }
         }
     }
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = GithubUserFragment()
-    }
 }

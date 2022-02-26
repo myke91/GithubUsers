@@ -1,9 +1,12 @@
 package com.myke.sharecare.shared.data.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
+@Entity(tableName = "githubUser")
 data class GithubUserRaw(
-    val login: String,
+    @PrimaryKey val login: String,
     val id: Int,
     @Json(name = "node_id") val nodeId: String,
     @Json(name = "avatar_url") val avatarUrl: String,

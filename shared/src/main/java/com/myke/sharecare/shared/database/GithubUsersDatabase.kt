@@ -4,9 +4,10 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.myke.sharecare.shared.BuildConfig
 import com.myke.sharecare.shared.data.entities.GithubUser
+import com.myke.sharecare.shared.data.entities.GithubUserRaw
 
 @Database(
-    entities = [GithubUser::class],
+    entities = [GithubUserRaw::class],
     exportSchema = false,
     version = BuildConfig.GITHUB_USERS_DATABASE_VERSION
 )

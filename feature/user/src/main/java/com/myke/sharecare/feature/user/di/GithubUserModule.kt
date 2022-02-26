@@ -10,6 +10,7 @@ import com.myke.sharecare.feature.user.data.source.remote.GithubUserApi
 import com.myke.sharecare.feature.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.feature.user.interactors.GetGithubUsersUseCase
 import com.myke.sharecare.shared.database.GithubUserDao
+import com.myke.sharecare.shared.database.GithubUsersDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -87,7 +88,6 @@ class GithubUserModule {
 
     }
 
-
     @Provides
     fun githubUserMapper() = GithubUserMapper()
 
@@ -108,7 +108,6 @@ class GithubUserModule {
     @Provides
     fun githubUsersLocalDatasource(usersDao: GithubUserDao): GithubUsersLocalDatasource =
         GithubUsersLocalDatasource(usersDao)
-
 
 
     @Provides

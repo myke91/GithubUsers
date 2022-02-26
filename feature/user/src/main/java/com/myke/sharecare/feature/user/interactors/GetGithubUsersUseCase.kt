@@ -3,13 +3,17 @@ package com.myke.sharecare.feature.user.interactors
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.myke.sharecare.browsr.base.usecasetypes.BaseUseCaseWithOutParams
+import com.myke.sharecare.feature.user.business.GithubUserMapper
 import com.myke.sharecare.feature.user.data.GithubUserRepository
 import com.myke.sharecare.shared.data.entities.GithubUser
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetGithubUsersUseCase @Inject constructor(private val repository: GithubUserRepository) :
+class GetGithubUsersUseCase @Inject constructor(
+    private val repository: GithubUserRepository
+) :
     BaseUseCaseWithOutParams<Flow<PagingData<GithubUser>>> {
 
     override suspend fun run(): Flow<PagingData<GithubUser>> {
@@ -18,6 +22,5 @@ class GetGithubUsersUseCase @Inject constructor(private val repository: GithubUs
                 GithubUser(user = it.login, it.avatarUrl, it.url)
             }
         }
-
     }
 }

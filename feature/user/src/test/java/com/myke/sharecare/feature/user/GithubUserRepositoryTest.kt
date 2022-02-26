@@ -5,7 +5,8 @@ import com.myke.sharecare.feature.user.business.GithubUserMapper
 import com.myke.sharecare.shared.data.entities.GithubUser
 import com.myke.sharecare.shared.data.entities.GithubUserRaw
 import com.myke.sharecare.feature.user.data.GithubUserRepository
-import com.myke.sharecare.feature.user.data.source.remote.GithubPagingSource
+import com.myke.sharecare.feature.user.data.paging.GithubUsersPagingSource
+import com.myke.sharecare.feature.user.data.source.local.GithubUsersLocalDatasource
 import com.myke.sharecare.feature.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.shared.utils.BaseUnitTest
 import com.myke.sharecare.shared.data.result.DataState
@@ -24,8 +25,9 @@ import java.lang.RuntimeException
 class GithubUserRepositoryTest : BaseUnitTest() {
 
     private lateinit var repository: GithubUserRepository
-    private val datasource: GithubUsersRemoteDatasource = mock()
-    private val pagingSource: GithubPagingSource = mock()
+    private val remoteDatasource: GithubUsersRemoteDatasource = mock()
+    private val localDatasource: GithubUsersLocalDatasource = mock()
+    private val pagingSource: GithubUsersPagingSource = mock()
     private val pagedUsers = mock<PagingData<List<GithubUser>>>()
     private val users = mock<List<GithubUserRaw>>()
     private val exception = RuntimeException("something went wrong")
@@ -59,7 +61,7 @@ class GithubUserRepositoryTest : BaseUnitTest() {
     }
 
     private suspend fun mockSuccessfulCase() {
-        whenever(datasource.fetchGithubUsers(0, 20)).thenReturn(
+        whenever(remoteDatasource.fetchGithubUsers(0, 20)).thenReturn(
             DataState.Success(users)
         )
 
@@ -70,14 +72,14 @@ class GithubUserRepositoryTest : BaseUnitTest() {
         )
 
 
-        repository = GithubUserRepository(datasource)
+        repository = GithubUserRepository(remoteDatasource, localDatasource)
     }
 
     private suspend fun mockFailureCase() {
-        whenever(datasource.fetchGithubUsers(0,20)).thenThrow(
+        whenever(remoteDatasource.fetchGithubUsers(0,20)).thenThrow(
            exception
         )
 
-        repository = GithubUserRepository(datasource)
+        repository = GithubUserRepository(remoteDatasource, localDatasource)
     }
 }

@@ -1,8 +1,9 @@
-package com.myke.sharecare.feature.user.data.source.remote
+package com.myke.sharecare.feature.user.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.myke.sharecare.feature.user.data.GithubUserRepository.Companion.NETWORK_PAGE_SIZE
+import com.myke.sharecare.feature.user.data.source.remote.GithubUsersRemoteDatasource
 import com.myke.sharecare.shared.data.entities.GithubUserRaw
 import com.myke.sharecare.shared.data.result.DataState
 import retrofit2.HttpException
@@ -10,7 +11,7 @@ import java.io.IOException
 
 private const val GITHUB_STARTING_PAGE_INDEX = 0
 
-class GithubPagingSource(
+class GithubUsersPagingSource(
     private val datasource: GithubUsersRemoteDatasource
 ) : PagingSource<Int, GithubUserRaw>() {
 

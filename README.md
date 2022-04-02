@@ -16,3 +16,4 @@ TODO
 1. Fix tests and increase test coverage
 1. add leak canary - https://github.com/square/leakcanary
 3. Use SonarLint 
+4. Complete remote mediator

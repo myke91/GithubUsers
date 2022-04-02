@@ -22,14 +22,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class GithubUserFragment : Fragment() {
 
-    lateinit var viewModel: GithubUserViewModel
+    lateinit var viewModel: GithubUserViewModel //by viewModels()
     lateinit var binding: FragmentUsersListBinding
 
     private var currentView: ViewType = ViewType.GRID
     lateinit var adapter: GithubUserListRecyclerViewAdapter
 
     @Inject
-    lateinit var viewModelFactory: GithubUserViewModelFactory
+    lateinit var viewModelFactory: GithubUserViewModelFactory //can optimize
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +38,9 @@ class GithubUserFragment : Fragment() {
         binding = FragmentUsersListBinding.inflate(layoutInflater)
 
         setupViewModel()
-        observeLoader()
-        observeError()
-        observeDataState()
+        observeLoader() // can remove
+        observeError() // can remove
+        observeDataState() //use LCE
 
         return binding.root
     }
@@ -134,6 +134,9 @@ class GithubUserFragment : Fragment() {
 
 
     private fun observeDataState() {
+
+        //when(some uistate sealed class, check for loading ,error and content)
+
         viewModel.currentView.observe(this as LifecycleOwner) {
             if (it == ViewType.LIST) {
                 adapter.setItemViewType(ViewType.LIST.name)
